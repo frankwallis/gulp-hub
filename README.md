@@ -19,6 +19,5 @@ Notes:
 - It will also improve performance if other shared modules are only installed there
 
 TODO:
-- Fix the glob pattern to match gulp (string|Array)
 - Improve the unique name algorithm
 - Enable dependencies between gulpfiles
