@@ -20,5 +20,5 @@ Notes:
 
 TODO:
 - Fix the glob pattern to match gulp (string|Array)
-- Make the assigned unique names more descriptive
+- Improve the unique name algorithm
 - Enable dependencies between gulpfiles
