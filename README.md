@@ -14,10 +14,6 @@ hub('./*/gulpfile.js');
 ```
 3) run 'gulp [taskname]'
 
-Notes:
-- This requires that gulp is installed in the hub directory only
-- It will also improve performance if other shared modules are only installed there
-
 TODO:
 - Improve the unique name algorithm
 - Enable dependencies between gulpfiles

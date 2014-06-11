@@ -1,15 +1,11 @@
 {
-  "name": "gulp-hub",
-  "description": "A gulp plugin to run tasks from multiple gulpfiles",
-  "version": "0.4.0",
+  "name": "project2",
+  "description": "gulp-hub example project",
+  "version": "0.0.0",
   "homepage": "https://github.com/frankwallis/gulp-hub",
   "author": {
     "name": "Frank Wallis",
     "email": "fwallis@outlook.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/frankwallis/gulp-hub.git"
   },
   "bugs": {
     "url": "https://github.com/frankwallis/gulp-hub/issues"
@@ -20,7 +16,7 @@
       "url": "https://github.com/frankwallis/gulp-hub/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/index.js",
+  "main": "watchfile.js",
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -28,12 +24,9 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "gulp": "^3.5.5",
-    "glob": "^4.0.2"
   },
   "devDependencies": {
-    "gulp": "^3.5.5",
-    "gulp-bump": "^0.1.8"
+    "gulp": "^3.5.5"
   },
   "keywords": [
     "gulp",
