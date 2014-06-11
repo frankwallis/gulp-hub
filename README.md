@@ -12,7 +12,7 @@ Usage:
 var hub = require('gulp-hub');
 hub('**/gulpfile.js');
 ```
-3) run 'gulp <taskname>'
+3) run 'gulp [taskname]'
 
 TODO:
 - Fix the glob pattern to match gulp (string|Array)
