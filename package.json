@@ -1,7 +1,7 @@
 {
   "name": "gulp-hub",
   "description": "A gulp plugin to run tasks from multiple gulpfiles",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "homepage": "https://github.com/frankwallis/gulp-hub",
   "author": {
     "name": "Frank Wallis",
