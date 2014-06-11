@@ -14,8 +14,11 @@ hub('./*/gulpfile.js');
 ```
 3) run 'gulp [taskname]'
 
+Notes:
+- This requires that gulp is installed in the hub directory only
+- It will also improve performance if other shared modules are only installed there
+
 TODO:
 - Fix the glob pattern to match gulp (string|Array)
-- Test (& fix) on Windows
 - Make the assigned unique names more descriptive
 - Enable dependencies between gulpfiles
