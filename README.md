@@ -10,10 +10,8 @@ Usage:
 2) Create a gulpfile.js which looks like this:
 ```
 var hub = require('gulp-hub');
-hub('./*/gulpfile.js');
+hub('./project*/gulpfile.js');
 ```
 3) run 'gulp [taskname]'
 
-TODO:
-- Improve the unique name algorithm
-- Enable dependencies between gulpfiles
+gulp-hub will execute that task in all of the gulpfiles
