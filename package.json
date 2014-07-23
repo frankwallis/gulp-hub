@@ -35,7 +35,10 @@
   },
   "devDependencies": {
     "gulp": "^3.5.5",
-    "gulp-bump": "^0.1.8"
+    "gulp-bump": "^0.1.8",
+    "proxyquire": "^1.0.1",
+    "should": "^4.0.4",
+    "sinon": "^1.10.3"
   },
   "keywords": [
     "gulp",
