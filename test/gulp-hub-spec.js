@@ -5,25 +5,20 @@ var pequire = require( 'proxyquire' );
 
 var TYPES = [ String, Number, Boolean, Object, Array, null, undefined ];
 
+var getHub = function ( overrides ) {
+    overrides = _.assign( {}, overrides )
+    return pequire( '../lib/index', overrides );
+};
+
 describe( 'gulp-hub', function () {
 
-    before( function () {
-        this.getTestModule = function () {
-            return pequire( '../lib/index', {} );
-        };
-    } );
-
-    beforeEach( function () {
-        this.testModule = this.getTestModule();
-    } );
-
     it( 'is a function', function () {
-        this.testModule.should.be.an.instanceOf( Function );
+        getHub().should.be.an.instanceOf( Function );
     } );
 
     it( 'takes one argument: A non-empty glob (string) or an array', function () {
 
-        var hub = this.testModule;
+        var hub = getHub();
 
         var testPatterns = [];
         testPatterns.push( TYPES, 'ok' );
