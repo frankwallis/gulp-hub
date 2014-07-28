@@ -3,8 +3,6 @@ var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
 
-var INVALID_VALUES = [ '', 0, 1, true, false, [], {}, { a: 'foo' }, null, undefined ];
-
 describe( 'gulp-hub', function () {
 
     before( function () {
@@ -21,16 +19,19 @@ describe( 'gulp-hub', function () {
         this.testModule.should.be.an.instanceOf( Function );
     } );
 
-    it( 'takes one argument: A non-empty glob (string) or an array', function () {
+    it( 'takes a glob or an array of globs', function () {
         var hub = this.testModule;
+        var INVALID_VALUES = [ '', 0, 1, true, false, [], {}, { a: 'foo' }, null, undefined ];
 
+        // Assert we get an error for invalid values
         INVALID_VALUES.forEach( function ( testValue ) {
             hub.bind( null, testValue ).should.throw(
-                'A non-empty glob pattern or array of glob patterns is required.'
+                'A glob pattern or an array of glob patterns is required.'
             );
         } );
 
-        hub( 'ok' );
+        // Assert we don't get an error for a valid glob (non-empty string)
+        hub.bind( null, 'ok' ).should.not.throw();
     } );
 
     it( 'loads all specified gulpfiles' );
