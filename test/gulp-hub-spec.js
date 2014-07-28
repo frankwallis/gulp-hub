@@ -37,32 +37,4 @@ describe( 'gulp-hub', function () {
         hub.bind( null, 'ok' ).should.not.throw();
     } );
 
-    it( 'resolves glob pattern to a list of files', function () {
-        var pdeps = { glob: { sync: sinon.spy( HAPPY_PROXY_DEPS.glob.sync ) } };
-        var hub = getHub( pdeps );
-
-        var spy = pdeps.glob.sync;
-        var globOpts = { 'nosort': true };
-
-        hub( 'single-glob-pattern' );
-        spy.calledOnce.should.be.true;
-        spy.calledWith( 'single-glob-pattern', globOpts ).should.be.true;
-
-        spy.reset();
-
-        hub( [ 'array-with-one-element' ] );
-        spy.calledOnce.should.be.true;
-        spy.calledWith( 'array-with-one-element', globOpts ).should.be.true;
-
-        spy.reset();
-
-        hub( [ 'array', 'with', 'more', 'than', 'one', 'element' ] );
-        spy.calledOnce.should.be.true;
-        spy.calledWith( '{array,with,more,than,one,element}', globOpts ).should.be.true;
-    } );
-
-    it( 'loads all specified gulpfiles' );
-
-    it( 'creates a gulp task tree' );
-
 } );
