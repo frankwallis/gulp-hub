@@ -1,5 +1,5 @@
 var _ = require( 'lodash' );
-var should = require( 'should' );
+require( 'should' );
 
 describe( 'hub-util', function () {
     var hutil = require('../lib/hub-util');
@@ -36,6 +36,11 @@ describe( 'hub-util', function () {
                     isValidHubFile( testFile ).should.be.false;
                 } );
             } );
+        } );
+
+        it( 'returns false if uniqueName does not match the relativePath', function () {
+            var testFile = _.assign( {}, VALID_FILE, { uniqueName: 'not-the-rel-path' } );
+            isValidHubFile( testFile ).should.be.false;
         } );
     } );
 } );
