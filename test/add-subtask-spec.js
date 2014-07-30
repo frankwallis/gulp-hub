@@ -24,21 +24,37 @@ describe.only( 'add-subtask', function () {
 
     it( 'errors if the task registry is not a plain object', function () {
         var addSubtask = getAddSubtask();
-        tutil.getTypeExamples( 'PlainObject' ).forEach( function ( type ) {
-            addSubtask.bind( null, undefined, type ).should.throw('`tasks` must be a plain object.');
+        tutil.getTypeExamples( _.isPlainObject ).forEach( function ( type ) {
+            addSubtask.bind( null, undefined, type )
+                .should.throw('`tasks` must be a plain object.');
         } );
-        addSubtask.bind( null, { uniqueName: null }, {}, 'string' ).should.not.throw();
     } );
 
     it( 'errors if name is not a string', function () {
         var addSubtask = getAddSubtask();
-        tutil.getTypeExamples( 'String' ).forEach( function ( type ) {
-            addSubtask.bind( null, undefined, {}, type ).should.throw('`name` must be a string.');
+        tutil.getTypeExamples( _.isString ).forEach( function ( type ) {
+            addSubtask.bind( null, undefined, {}, type )
+                .should.throw('`name` must be a string.');
         } );
-        addSubtask.bind( null, { uniqueName: null }, {}, 'string' ).should.not.throw();
     } );
 
-    it( 'errors if param 1 is not an array or a function' );
+    it( 'errors if param1 is not an array or function', function () {
+        var addSubtask = getAddSubtask();
+        tutil.getTypeExamples( function ( el ) {
+            return _.isArray( el ) || _.isFunction( el )
+        } ).forEach( function ( type ) {
+            addSubtask.bind( null, undefined, {}, 'string', type )
+                .should.throw('`param1` must be an array or function.');
+        } );
+    } );
 
-    it( 'errors if param 2 is not a function or undefined' );
+    it( 'errors if param2 is not a or function or undefined', function () {
+        var addSubtask = getAddSubtask();
+        tutil.getTypeExamples( function ( el ) {
+            return _.isFunction( el ) || _.isUndefined( el )
+        } ).forEach( function ( type ) {
+            addSubtask.bind( null, undefined, {}, 'string', [], type )
+                .should.throw('`param2` must be a function or undefined.');
+        } );
+    } );
 } );
