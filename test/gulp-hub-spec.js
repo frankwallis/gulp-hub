@@ -102,5 +102,19 @@ describe( 'gulp-hub', function () {
         loadSpy.calledWith( { relativePath: 'rel-path-2' }, {} ).should.be.true;
     } );
 
-    it( 'adds each discovered task' );
+    it( 'adds each subfile\'s task', function () {
+        var addTaskSpy = sinon.spy();
+        var hub = getHub( {
+            './get-subfiles': function () { return [ 1, 2 ] },
+            './load-subfile': function ( subfile, tasks ) {
+                tasks.a = 'foo';
+                tasks.b = 'bar';
+            },
+            './add-task': addTaskSpy
+        } );
+        hub( 'test-pattern' );
+        addTaskSpy.calledTwice.should.be.true;
+        addTaskSpy.calledWith( 'foo' ).should.be.true;
+        addTaskSpy.calledWith( 'bar' ).should.be.true;
+    } );
 } );
