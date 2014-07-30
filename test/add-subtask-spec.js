@@ -57,4 +57,14 @@ describe.only( 'add-subtask', function () {
                 .should.throw('`param2` must be a function or undefined.');
         } );
     } );
+
+    it( 'registers a master task with `name`' );
+
+    it( 'prefixes any subfile task dependencies with the subfile\'s unique name' );
+
+    it( 'changes the working directory to the subfile\'s dirname' );
+
+    it( 'executes the subfile task\'s callback' );
+
+    it( 'registers each subfile task in the task registry' );
 } );
