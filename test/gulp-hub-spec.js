@@ -87,7 +87,20 @@ describe( 'gulp-hub', function () {
         colorSpy.calledWith( 'rel-path-2' ).should.be.true;
     } );
 
-    it( 'loads each subfile' );
+    it( 'loads each subfile', function () {
+        var loadSpy = sinon.spy();
+        var hub = getHub( {
+            './get-subfiles': function () { return [
+                { relativePath: 'rel-path-1' },
+                { relativePath: 'rel-path-2' }
+            ] },
+            './load-subfile': loadSpy
+        } );
+        hub( 'test-pattern' );
+        loadSpy.calledTwice.should.be.true;
+        loadSpy.calledWith( { relativePath: 'rel-path-1' }, {} ).should.be.true;
+        loadSpy.calledWith( { relativePath: 'rel-path-2' }, {} ).should.be.true;
+    } );
 
     it( 'adds each discovered task' );
 } );
