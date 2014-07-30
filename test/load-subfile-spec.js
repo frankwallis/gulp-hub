@@ -1,7 +1,7 @@
 var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
-var pequire = require( 'proxyquire' );
+var pequire = require( 'proxyquire' ).noCallThru();
 
 var HAPPY_PROXY_DEPS = {
     gulp: {
@@ -37,7 +37,7 @@ describe( 'load-subfile', function () {
     } );
 
     xit( 'loads the specified file', function () {
-        var pdeps = { 'abs-path': sinon.spy() };
+        var pdeps = { 'abs-path': _.noop };
         var loadSubfile = getLoad( pdeps );
         loadSubfile( { absolutePath: 'abs-path' }, {} )
     } );
