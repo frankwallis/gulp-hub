@@ -36,5 +36,9 @@ describe.only( 'load-subfile', function () {
         } );
     } );
 
-    it( 'loads the specified file' );
+    it( 'loads the specified file', function () {
+        var pdeps = { 'abs-path': sinon.spy() };
+        var loadSubfile = getLoad( pdeps );
+        loadSubfile( { absolutePath: 'abs-path' }, {} )
+    } );
 } );
