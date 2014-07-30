@@ -13,7 +13,7 @@ var HAPPY_PROXY_DEPS = {
 
 // Proxyquire a gulp-hub object, optionally extending the happy path dependencies
 var getHub = function ( proxyDeps ) {
-  return pequire( '../lib/index', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
+    return pequire( '../lib/index', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
 };
 
 describe( 'gulp-hub', function () {
