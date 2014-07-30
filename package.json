@@ -31,15 +31,15 @@
     "glob": "^4.0.2",
     "gulp": "^3.5.5",
     "gulp-util": "^2.2.16",
-    "run-sequence": "^0.3.6"
+    "run-sequence": "^0.3.6",
+    "lodash": "^2.4.1"
   },
   "devDependencies": {
     "gulp": "^3.5.5",
     "gulp-bump": "^0.1.8",
     "proxyquire": "^1.0.1",
     "should": "^4.0.4",
-    "sinon": "^1.10.3",
-    "lodash": "^2.4.1"
+    "sinon": "^1.10.3"
   },
   "keywords": [
     "gulp",
