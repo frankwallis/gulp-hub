@@ -49,7 +49,16 @@ describe( 'gulp-hub', function () {
         resolveGlobSpy.calledWith( 'test-pattern' );
     } );
 
-    it( 'creates a list of Gulp Hub files from a file list' );
+    it( 'creates a list of Gulp Hub files from a file list', function () {
+        var spy = sinon.spy( HAPPY_PROXY_DEPS[ './get-subfiles' ] );
+        var hub = getHub( {
+            './resolve-glob': function () { return 'resolve-glob-return' },
+            './get-subfiles': spy
+        } );
+        hub( 'test-pattern' );
+        spy.calledOnce.should.be.true;
+        spy.calledWith( 'resolve-glob-return' ).should.be.true;
+    } );
 
     it( 'logs each file it loads' );
 
