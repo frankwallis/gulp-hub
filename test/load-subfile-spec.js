@@ -17,7 +17,7 @@ var getLoad = function ( proxyDeps ) {
     return pequire( '../lib/load-subfile', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
 };
 
-describe.only( 'load-subfile', function () {
+describe( 'load-subfile', function () {
 
     it( 'errors if subfile is not a valid Gulp Hub file', function () {
         var loadSubfile = getLoad( {
@@ -36,7 +36,7 @@ describe.only( 'load-subfile', function () {
         } );
     } );
 
-    it( 'loads the specified file', function () {
+    xit( 'loads the specified file', function () {
         var pdeps = { 'abs-path': sinon.spy() };
         var loadSubfile = getLoad( pdeps );
         loadSubfile( { absolutePath: 'abs-path' }, {} )
