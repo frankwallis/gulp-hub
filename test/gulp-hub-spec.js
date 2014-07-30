@@ -6,13 +6,14 @@ var pequire = require( 'proxyquire' );
 // Happy-path proxyquire dependencies, i.e., dependencies that will allow
 // gulp-hub to complete without errors
 var HAPPY_PROXY_DEPS = {
-    glob: {
-        sync: function () { return [] },
+    'gulp-util': {
+        log:    _.noop,
+        colors: { yellow: _.noop }
     },
     './resolve-glob': _.noop,
     './get-subfiles': function () { return [] },
     './load-subfile': _.noop,
-    './add-task': _.noop
+    './add-task':     _.noop,
 };
 
 // Proxyquire gulp-hub, optionally extending the happy-path proxy dependencies
@@ -60,7 +61,31 @@ describe( 'gulp-hub', function () {
         spy.calledWith( 'resolve-glob-return' ).should.be.true;
     } );
 
-    it( 'logs each file it loads' );
+    it( 'logs each file it loads, path in yellow', function () {
+        var logSpy = sinon.spy();
+        var colorSpy = sinon.spy( function ( s ) { return 'yellow-' + s } );
+
+        var hub = getHub( {
+            'gulp-util': {
+                log:    logSpy,
+                colors: { yellow: colorSpy }
+            },
+            './get-subfiles': function () { return [
+                { relativePath: 'rel-path-1' },
+                { relativePath: 'rel-path-2' }
+            ] }
+        } );
+
+        hub( 'test-pattern' );
+
+        logSpy.calledTwice.should.be.true;
+        logSpy.calledWith( 'Loading', 'yellow-rel-path-1' ).should.be.true;
+        logSpy.calledWith( 'Loading', 'yellow-rel-path-2' ).should.be.true;
+
+        colorSpy.calledTwice.should.be.true;
+        colorSpy.calledWith( 'rel-path-1' ).should.be.true;
+        colorSpy.calledWith( 'rel-path-2' ).should.be.true;
+    } );
 
     it( 'loads each subfile' );
 
