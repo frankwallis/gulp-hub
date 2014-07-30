@@ -25,14 +25,19 @@ describe.only( 'add-subtask', function () {
         var addSubtask = getAddSubtask();
         var INVALID_TYPES = [ '', 0, 1, true, false, [], null, undefined ];
         INVALID_TYPES.forEach( function ( type ) {
-            addSubtask.bind( null, undefined, '' ).should.throw('`tasks` must be a plain object.');
+            addSubtask.bind( null, undefined, type ).should.throw('`tasks` must be a plain object.');
         } );
     } );
 
-    it( 'ensures name is a string' );
+    it( 'errors if name is not a string', function () {
+        var addSubtask = getAddSubtask();
+        var INVALID_TYPES = [ 0, 1, true, false, [], {}, null, undefined ];
+        INVALID_TYPES.forEach( function ( type ) {
+            addSubtask.bind( null, undefined, {}, type ).should.throw('`name` must be a string.');
+        } );
+    } );
 
+    it( 'errors if param 1 is not an array or a function' );
 
-    it( 'ensures param 1 is an array or a function' );
-
-    it( 'ensures param 2 is a function or undefined' );
+    it( 'errors if param 2 is not a function or undefined' );
 } );
