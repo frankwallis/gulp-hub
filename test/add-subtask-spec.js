@@ -1,12 +1,25 @@
+var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
 
-describe( 'add-subtask', function () {
+var HAPPY_PROXY_DEPS = {
+    path:         { dirname:        _.noop },
+    './hub-util': { isValidHubFile: function (){ return true }    }
+};
 
-    it( 'ensures the subfile is a gulp-hub file object' );
+var getAddSubtask = function ( proxyDeps ) {
+    return pequire( '../lib/add-subtask', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
+};
 
-    it( 'ensures subfile object has a uniqueName and absolutePath property' );
+describe.only( 'add-subtask', function () {
+
+    it( 'errors if subfile is not a valid Gulp Hub file', function () {
+        var addSubtask = getAddSubtask( {
+            './hub-util': { isValidHubFile: function () { return false } }
+        } );
+        addSubtask.should.throw( '`subfile` must be a valid Gulp Hub file object.' );
+    } );
 
     it( 'ensures the task registry is an array' );
 
