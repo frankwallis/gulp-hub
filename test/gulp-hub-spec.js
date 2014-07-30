@@ -3,8 +3,8 @@ var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
 
-// Happy-path proxyquire dependencies, i.e., dependencies that will allow gulp-
-// hub to complete without errors
+// Happy-path proxyquire dependencies, i.e., dependencies that will allow
+// gulp-hub to complete without errors
 var HAPPY_PROXY_DEPS = {
     glob: {
         sync: function () { return [] },
@@ -15,7 +15,7 @@ var HAPPY_PROXY_DEPS = {
     './add-task': _.noop
 };
 
-// Proxyquire a gulp-hub object, optionally extending the happy path dependencies
+// Proxyquire gulp-hub, optionally extending the happy-path proxy dependencies
 var getHub = function ( proxyDeps ) {
     return pequire( '../lib/index', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
 };
@@ -41,7 +41,13 @@ describe( 'gulp-hub', function () {
         hub.bind( null, 'ok' ).should.not.throw();
     } );
 
-    it( 'resolves a glob pattern to a file list' );
+    it( 'resolves a glob pattern to a file list', function () {
+        var resolveGlobSpy = sinon.spy();
+        var hub = getHub( { './resolve-glob': resolveGlobSpy } );
+        hub( 'test-pattern' );
+        resolveGlobSpy.calledOnce.should.be.true;
+        resolveGlobSpy.calledWith( 'test-pattern' );
+    } );
 
     it( 'creates a list of Gulp Hub files from a file list' );
 
