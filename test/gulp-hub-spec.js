@@ -7,8 +7,12 @@ var pequire = require( 'proxyquire' );
 // hub to complete without errors
 var HAPPY_PROXY_DEPS = {
     glob: {
-        sync: function () { return [] }
-    }
+        sync: function () { return [] },
+    },
+    './resolve-glob': _.noop,
+    './get-subfiles': function () { return [] },
+    './load-subfile': _.noop,
+    './add-task': _.noop
 };
 
 // Proxyquire a gulp-hub object, optionally extending the happy path dependencies
@@ -37,4 +41,8 @@ describe( 'gulp-hub', function () {
         hub.bind( null, 'ok' ).should.not.throw();
     } );
 
+    it( 'resolves a glob pattern to a file list' );
+
+    it( 'creates a list of Gulp Hub files from a file list' );
+    
 } );
