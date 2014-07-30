@@ -44,5 +44,10 @@ describe( 'gulp-hub', function () {
     it( 'resolves a glob pattern to a file list' );
 
     it( 'creates a list of Gulp Hub files from a file list' );
-    
+
+    it( 'logs each file it loads' );
+
+    it( 'loads each subfile' );
+
+    it( 'adds each discovered task' );
 } );
