@@ -21,9 +21,16 @@ describe.only( 'add-subtask', function () {
         addSubtask.should.throw( '`subfile` must be a valid Gulp Hub file object.' );
     } );
 
-    it( 'ensures the task registry is an array' );
+    it( 'errors if the task registry is not a plain object', function () {
+        var addSubtask = getAddSubtask();
+        var INVALID_TYPES = [ '', 0, 1, true, false, [], null, undefined ];
+        INVALID_TYPES.forEach( function ( type ) {
+            addSubtask.bind( null, undefined, '' ).should.throw('`tasks` must be a plain object.');
+        } );
+    } );
 
     it( 'ensures name is a string' );
+
 
     it( 'ensures param 1 is an array or a function' );
 
