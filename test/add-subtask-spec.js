@@ -78,6 +78,18 @@ describe.only( 'add-subtask', function () {
         testTasks[ 'test-name' ].subtasks[ 0 ].name.should.eql( 'unique-name-test-name' );
     } );
 
+    it( 'prefixes the subfile\'s task dependencies with its unique name', function () {
+        var testTasks = {};
+        var addSubtask = getAddSubtask();
+        addSubtask(
+            { uniqueName: 'subfile-unique-name' }, testTasks, 'task-name',
+            [ 'task-dep-1', 'task-dep-2' ]
+        );
+        var subtaskDeps = testTasks[ 'task-name' ].subtasks[ 0 ].param1;
+        subtaskDeps[ 0 ].should.eql( 'subfile-unique-name-task-dep-1' );
+        subtaskDeps[ 1 ].should.eql( 'subfile-unique-name-task-dep-2' );
+    } );
+
     it( 'changes the working directory to the subfile\'s dirname' );
 
     it( 'executes the subfile task\'s callback' );
