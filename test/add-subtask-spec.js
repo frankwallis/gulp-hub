@@ -2,7 +2,7 @@ var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
-var tutil   = require( './test-util' );
+var tutil   = require( './lib/test-util' );
 
 var HAPPY_PROXY_DEPS = {
     path:         { dirname:        _.noop },

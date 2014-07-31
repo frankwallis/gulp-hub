@@ -2,6 +2,7 @@ var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' ).noCallThru();
+var tutil   = require( './lib/test-util' );
 
 var HAPPY_PROXY_DEPS = {
     gulp: {
@@ -30,8 +31,7 @@ describe( 'load-subfile', function () {
 
     it( 'errors if the task registry is not an object', function () {
         var loadSubfile = getLoad();
-        var INVALID_VALUES = [ '', 0, 1, true, false, [], null, undefined ];
-        INVALID_VALUES.forEach( function ( testTasksParam ) {
+        tutil.getTypeExamples( _.isPlainObject ).forEach( function ( testTasksParam ) {
             loadSubfile.bind( null, null, testTasksParam ).should.throw( '`task` must be an object' );
         } );
     } );
@@ -39,6 +39,6 @@ describe( 'load-subfile', function () {
     xit( 'loads the specified file', function () {
         var pdeps = { 'abs-path': _.noop };
         var loadSubfile = getLoad( pdeps );
-        loadSubfile( { absolutePath: 'abs-path' }, {} )
+        loadSubfile( { absolutePath: 'abs-path' }, {} );
     } );
 } );

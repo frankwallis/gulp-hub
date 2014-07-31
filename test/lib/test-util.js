@@ -18,15 +18,19 @@ var _ = require( 'lodash' );
 module.exports.getTypeExamples = function ( excludeFunc ) {
 
     // Examples of each
-    var ALL_TYPES = [
+    var ALL_TYPE_EXAMPLES = [
         '', 'a', 0, 1, false, true, {}, { a: 1 }, [], [ 'a' ], null, undefined
     ];
 
     // If no exclusions, return all type examples
     if ( _.isUndefined( excludeFunc ) || !_.isFunction( excludeFunc ) ) {
-        return ALL_TYPES;
+        return ALL_TYPE_EXAMPLES;
     }
 
     // Otherwise, remove the specified exclude type from the type examples
-    return _.remove( ALL_TYPES, function ( el ) { return !excludeFunc( el ) } );
+    var typeExamples = _.remove( ALL_TYPE_EXAMPLES, function ( el ) {
+        return !excludeFunc( el )
+    } );
+
+    return typeExamples
 }

@@ -1,6 +1,8 @@
+var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
+var tutil   = require( './lib/test-util' );
 
 var MODULE_PATH = '../lib/get-subfiles';
 
@@ -8,13 +10,9 @@ describe( 'get-subfiles', function () {
 
     it( 'requires an array of file paths', function () {
         var getSubfiles = require( MODULE_PATH );
-        var INVALID_VALUES = [ '', 0, 1, true, false, {}, { a: 'foo' }, null, undefined ];
-
-        // Assert we get an error for invalid values
-        INVALID_VALUES.forEach( function ( testValue ) {
-            getSubfiles.bind( null, testValue ).should.throw(
-                'An array of file paths is required.'
-            );
+        tutil.getTypeExamples( _.isArray ).forEach( function ( testValue ) {
+            getSubfiles.bind( null, testValue )
+                .should.throw( 'An array of file paths is required.' );
         } );
 
         // Assert we don't get an error for valid values
