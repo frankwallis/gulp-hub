@@ -6,7 +6,7 @@ var tutil   = require( './test-util' );
 
 var HAPPY_PROXY_DEPS = {
     path:         { dirname:        _.noop },
-    './hub-util': { isValidHubFile: function (){ return true }    }
+    './hub-util': { isValidHubFile: function (){ return true } }
 };
 
 var getAddSubtask = function ( proxyDeps ) {
@@ -40,9 +40,10 @@ describe.only( 'add-subtask', function () {
 
     it( 'errors if param1 is not an array or function', function () {
         var addSubtask = getAddSubtask();
-        tutil.getTypeExamples( function ( el ) {
-            return _.isArray( el ) || _.isFunction( el )
-        } ).forEach( function ( type ) {
+        var excludeFunc = function ( el ) {
+            return _.isArray( el ) || _.isFunction( el );
+        };
+        tutil.getTypeExamples( excludeFunc ).forEach( function ( type ) {
             addSubtask.bind( null, undefined, {}, 'string', type )
                 .should.throw('`param1` must be an array or function.');
         } );
@@ -50,15 +51,25 @@ describe.only( 'add-subtask', function () {
 
     it( 'errors if param2 is not a or function or undefined', function () {
         var addSubtask = getAddSubtask();
-        tutil.getTypeExamples( function ( el ) {
-            return _.isFunction( el ) || _.isUndefined( el )
-        } ).forEach( function ( type ) {
+        var excludeFunc = function ( el ) {
+            return _.isFunction( el ) || _.isUndefined( el );
+        };
+        tutil.getTypeExamples( excludeFunc ).forEach( function ( type ) {
             addSubtask.bind( null, undefined, {}, 'string', [], type )
                 .should.throw('`param2` must be a function or undefined.');
         } );
     } );
 
-    it( 'registers a master task with `name`' );
+    it( 'registers a master task with `name` if it doesn\'t already exist', function () {
+        var testTasks = {};
+        var addSubtask = getAddSubtask();
+        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'test-name', [] );
+
+        var taskObj = testTasks[ 'test-name' ];
+        _.isPlainObject( taskObj ).should.be.true;
+        taskObj.name = 'test-name';
+        _.isArray( taskObj.subtasks ).should.be.true;
+    } );
 
     it( 'prefixes any subfile task dependencies with the subfile\'s unique name' );
 
