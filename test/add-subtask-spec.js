@@ -71,7 +71,12 @@ describe.only( 'add-subtask', function () {
         _.isArray( taskObj.subtasks ).should.be.true;
     } );
 
-    it( 'prefixes any subfile task dependencies with the subfile\'s unique name' );
+    it( 'registers the subfile\'s tasks prefixed with its unique name under the master task name', function () {
+        var testTasks = {};
+        var addSubtask = getAddSubtask();
+        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'test-name', [] );
+        testTasks[ 'test-name' ].subtasks[ 0 ].name.should.eql( 'unique-name-test-name' );
+    } );
 
     it( 'changes the working directory to the subfile\'s dirname' );
 
