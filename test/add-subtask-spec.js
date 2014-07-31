@@ -63,19 +63,19 @@ describe.only( 'add-subtask', function () {
     it( 'registers a master task with `name` if it doesn\'t already exist', function () {
         var testTasks = {};
         var addSubtask = getAddSubtask();
-        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'test-name', [] );
+        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'task-name', [] );
 
-        var taskObj = testTasks[ 'test-name' ];
+        var taskObj = testTasks[ 'task-name' ];
         _.isPlainObject( taskObj ).should.be.true;
-        taskObj.name = 'test-name';
+        taskObj.name = 'task-name';
         _.isArray( taskObj.subtasks ).should.be.true;
     } );
 
     it( 'registers the subfile\'s tasks prefixed with its unique name under the master task name', function () {
         var testTasks = {};
         var addSubtask = getAddSubtask();
-        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'test-name', [] );
-        testTasks[ 'test-name' ].subtasks[ 0 ].name.should.eql( 'unique-name-test-name' );
+        addSubtask( { uniqueName: 'unique-name' }, testTasks, 'task-name', [] );
+        testTasks[ 'task-name' ].subtasks[ 0 ].name.should.eql( 'unique-name-task-name' );
     } );
 
     it( 'prefixes the subfile\'s task dependencies with its unique name', function () {
