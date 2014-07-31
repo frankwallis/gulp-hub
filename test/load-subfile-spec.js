@@ -32,9 +32,13 @@ describe( 'load-subfile', function () {
         } );
     } );
 
-    xit( 'loads the specified file', function () {
-        var pdeps = { 'abs-path': _.noop };
-        var loadSubfile = getLoad( pdeps );
-        loadSubfile( { absolutePath: 'abs-path' }, {} );
-    } );
+    // TODO: Implement these specs. I'm not sure exactly how to test these
+    // specs as the current implementation involves the `require`, `module`
+    // objects which are local to each script. - @robatron
+
+    it( 'proxies `gulp.task` to our add-subtask' );
+
+    it( '`require`s the specified file' );
+
+    it( 'adds tasks from the local gulpfile' );
 } );
