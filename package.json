@@ -8,8 +8,8 @@
     "email": "fwallis@outlook.com"
   },
   "contributors": [
-      "Rob McGuire-Dale <rmcguir@rei.com>",
-      "Andrew Gatlabayan <agatlab@rei.com>"
+    "Rob McGuire-Dale <rmcguir@rei.com>",
+    "Andrew Gatlabayan <agatlab@rei.com>"
   ],
   "repository": {
     "type": "git",
@@ -29,7 +29,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "mocha --ui bdd --reporter spec"
+    "test": "gulp test"
   },
   "dependencies": {
     "glob": "^4.0.2",
@@ -41,10 +41,12 @@
   "devDependencies": {
     "gulp": "^3.5.5",
     "gulp-bump": "^0.1.8",
+    "gulp-istanbul": "^0.2.1",
+    "gulp-mocha": "^0.5.2",
+    "mocha": "^1.21.3",
     "proxyquire": "^1.0.1",
     "should": "^4.0.4",
-    "sinon": "^1.10.3",
-    "mocha": "^1.21.3"
+    "sinon": "^1.10.3"
   },
   "keywords": [
     "gulp",
