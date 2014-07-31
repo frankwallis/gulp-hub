@@ -90,9 +90,33 @@ describe.only( 'add-subtask', function () {
         subtaskDeps[ 1 ].should.eql( 'subfile-unique-name-task-dep-2' );
     } );
 
-    it( 'changes the working directory to the subfile\'s dirname' );
+    it( 'wraps the subtask\'s callbacks in a function that corrects the working directory', function () {
+        var testTasks = {};
+        var callbackSpy = sinon.spy();
+        var dirnameSpy = sinon.spy( function () { return '.' } );
 
-    it( 'executes the subfile task\'s callback' );
+        var addSubtask = getAddSubtask( { path: { dirname: dirnameSpy } } );
+        addSubtask(
+            { uniqueName: 'subfile-unique-name', absolutePath: '.' },
+            testTasks, 'task-name', callbackSpy
+        );
+        testTasks[ 'task-name' ].subtasks[ 0 ].param1();
 
-    it( 'registers each subfile task in the task registry' );
+        dirnameSpy.calledOnce.should.be.true;
+        dirnameSpy.calledWith( '.' ).should.be.true;
+        callbackSpy.calledOnce.should.be.true;
+
+        dirnameSpy.reset();
+        callbackSpy.reset();
+
+        addSubtask(
+            { uniqueName: 'subfile-unique-name-2', absolutePath: '.' },
+            testTasks, 'task-name-2', [], callbackSpy
+        );
+        testTasks[ 'task-name-2' ].subtasks[ 0 ].param2();
+
+        dirnameSpy.calledOnce.should.be.true;
+        dirnameSpy.calledWith( '.' ).should.be.true;
+        callbackSpy.calledOnce.should.be.true;
+    } );
 } );
