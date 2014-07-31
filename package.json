@@ -7,6 +7,10 @@
     "name": "Frank Wallis",
     "email": "fwallis@outlook.com"
   },
+  "contributors": [
+      "Rob McGuire-Dale <rmcguir@rei.com>",
+      "Andrew Gatlabayan <agatlab@rei.com>"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/frankwallis/gulp-hub.git"
