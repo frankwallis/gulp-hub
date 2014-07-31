@@ -13,7 +13,7 @@ var getAddSubtask = function ( proxyDeps ) {
     return pequire( '../lib/add-subtask', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
 };
 
-describe.only( 'add-subtask', function () {
+describe( 'add-subtask', function () {
 
     it( 'errors if subfile is not a valid Gulp Hub file', function () {
         var addSubtask = getAddSubtask( {
