@@ -1,5 +1,6 @@
-var _ = require( 'lodash' );
-require( 'should' );
+var _      = require( 'lodash' );
+var should = require( 'should' );
+var tutil  = require( './lib/test-util' );
 
 describe( 'hub-util', function () {
     var hutil = require('../lib/hub-util');
@@ -14,8 +15,7 @@ describe( 'hub-util', function () {
         } );
 
         it( 'returns false if not a plain object', function () {
-            var INVALID_TYPES = [ '', 0, 1, true, false, [], null, undefined ];
-            INVALID_TYPES.forEach( function ( type ) {
+            tutil.getTypeExamples( _.isPlainObject ).forEach( function ( type ) {
                 isValidHubFile( type ).should.be.false;
             } );
         } );
@@ -28,8 +28,7 @@ describe( 'hub-util', function () {
         } );
 
         it( 'returns false if properties are not strings', function () {
-            var INVALID_TYPES = [ 0, 1, true, false, [], {}, null, undefined ];
-            INVALID_TYPES.forEach( function ( type ) {
+            tutil.getTypeExamples( _.isString ).forEach( function ( type ) {
                 EXPECTED_PROPS.forEach( function ( prop ) {
                     var testFile = _.assign( {}, VALID_FILE );
                     testFile[ prop ] = type;

@@ -5,12 +5,8 @@ var pequire = require( 'proxyquire' ).noCallThru();
 var tutil   = require( './lib/test-util' );
 
 var HAPPY_PROXY_DEPS = {
-    gulp: {
-        Gulp: _.noop
-    },
-    './hub-util': {
-        isValidHubFile: function (){ return true }
-    },
+    gulp:            { Gulp:           _.noop },
+    './hub-util':    { isValidHubFile: function (){ return true } },
     './add-subtask': _.noop
 };
 
