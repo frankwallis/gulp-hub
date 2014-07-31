@@ -28,6 +28,15 @@ describe( 'add-task', function () {
         taskSpy.calledWith( 'task-name' ).should.be.true;
     } );
 
-    it( 'creates a master task to run all subtasks in sequence' );
+    it( 'creates a master task to run all subtasks in sequence', function () {
+        var taskSpy = sinon.spy();
+        var addTask = getAddTask( { gulp: { task: taskSpy } } );
+        addTask( {
+            name: 'task-name',
+            subtasks: []
+        } );
+        taskSpy.calledOnce.should.be.true;
+        taskSpy.calledWith( 'task-name' ).should.be.true;
+    } );
 
 } );
