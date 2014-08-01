@@ -21,7 +21,7 @@ var getHub = function ( proxyDeps ) {
     return pequire( '../lib/index', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
 };
 
-describe( 'gulp-hub', function () {
+describe( 'index', function () {
 
     it( 'is a function', function () {
         getHub().should.be.an.instanceOf( Function );

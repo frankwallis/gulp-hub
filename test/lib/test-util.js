@@ -29,8 +29,8 @@ module.exports.getTypeExamples = function ( excludeFunc ) {
 
     // Otherwise, remove the specified exclude type from the type examples
     var typeExamples = _.remove( ALL_TYPE_EXAMPLES, function ( el ) {
-        return !excludeFunc( el )
+        return !excludeFunc( el );
     } );
 
-    return typeExamples
-}
+    return typeExamples;
+};
