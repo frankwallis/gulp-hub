@@ -29,14 +29,42 @@ describe( 'add-task', function () {
     } );
 
     it( 'creates a master task to run all subtasks in sequence', function () {
-        var taskSpy = sinon.spy();
-        var addTask = getAddTask( { gulp: { task: taskSpy } } );
+        var runSeqSpy = sinon.spy();
+        var taskSpy = sinon.spy( function ( name, callback ) {
+            callback();
+        } );
+
+        var addTask = getAddTask( {
+            gulp: {
+                task: taskSpy
+            },
+            'run-sequence': runSeqSpy
+        } );
+
         addTask( {
             name: 'task-name',
-            subtasks: []
-        } );
-        taskSpy.calledOnce.should.be.true;
+            subtasks: [
+                {
+                    name: 'subfile-unique-name-1-task-name',
+                    param1: _.noop
+                },
+                {
+                    name: 'subfile-unique-name-2-task-name',
+                    param1: _.noop
+                }
+            ] }
+        );
+
+        taskSpy.calledThrice.should.be.true;
         taskSpy.calledWith( 'task-name' ).should.be.true;
+        taskSpy.calledWith( 'subfile-unique-name-1-task-name' ).should.be.true;
+        taskSpy.calledWith( 'subfile-unique-name-2-task-name' ).should.be.true;
+
+        runSeqSpy.calledOnce.should.be.true;
+        runSeqSpy.calledWith(
+            'subfile-unique-name-1-task-name',
+            'subfile-unique-name-2-task-name'
+        ).should.be.true;
     } );
 
 } );
