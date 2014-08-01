@@ -104,6 +104,7 @@ describe( 'index', function () {
 
     it( 'adds each subfile\'s task', function () {
         var addTaskSpy = sinon.spy();
+
         var hub = getHub( {
             './get-subfiles': function () { return [ 1, 2 ] },
             './load-subfile': function ( subfile, tasks ) {
@@ -113,6 +114,7 @@ describe( 'index', function () {
             './add-task': addTaskSpy
         } );
         hub( 'test-pattern' );
+
         addTaskSpy.calledTwice.should.be.true;
         addTaskSpy.calledWith( 'foo' ).should.be.true;
         addTaskSpy.calledWith( 'bar' ).should.be.true;
