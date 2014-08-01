@@ -71,6 +71,22 @@ describe( 'add-subtask', function () {
         _.isArray( taskObj.subtasks ).should.be.true;
     } );
 
+    it( 'skips task registry record initialization if `name` already exists', function () {
+        var TASK_NAME = 'task-name';
+        var testTasks = {};
+        testTasks[ TASK_NAME ] = {
+            name: TASK_NAME,
+            subtasks: []
+        };
+        var addSubtask = getAddSubtask();
+        addSubtask( { uniqueName: 'unique-name' }, testTasks, TASK_NAME, [] );
+
+        var taskObj = testTasks[ TASK_NAME ];
+        _.isPlainObject( taskObj ).should.be.true;
+        taskObj.name = TASK_NAME;
+        _.isArray( taskObj.subtasks ).should.be.true;
+    } );
+
     it( 'registers the subfile\'s tasks prefixed with its unique name under the master task name', function () {
         var testTasks = {};
         var addSubtask = getAddSubtask();
