@@ -35,7 +35,7 @@
     "glob": "^4.0.2",
     "gulp": "^3.5.5",
     "gulp-util": "^2.2.16",
-    "run-sequence": "^0.3.6",
+    "run-sequence": "^1.0.2",
     "lodash": "^2.4.1"
   },
   "devDependencies": {
