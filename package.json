@@ -1,7 +1,7 @@
 {
   "name": "gulp-hub",
   "description": "A gulp plugin to run tasks from multiple gulpfiles",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "homepage": "https://github.com/frankwallis/gulp-hub",
   "author": {
     "name": "Frank Wallis",
@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "glob": "^4.0.2",
-    "gulp": "^3.5.5",
+    "gulp": "^3.8.10",
     "gulp-util": "^2.2.16",
-    "run-sequence": "^1.0.2",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "run-sequence": "^1.0.2"
   },
   "devDependencies": {
     "gulp": "^3.5.5",

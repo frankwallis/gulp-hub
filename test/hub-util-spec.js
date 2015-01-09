@@ -36,10 +36,5 @@ describe( 'hub-util', function () {
                 } );
             } );
         } );
-
-        it( 'returns false if uniqueName does not match the relativePath', function () {
-            var testFile = _.assign( {}, VALID_FILE, { uniqueName: 'not-the-rel-path' } );
-            isValidHubFile( testFile ).should.be.false;
-        } );
     } );
 } );
