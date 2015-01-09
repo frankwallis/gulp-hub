@@ -9,7 +9,7 @@ describe( 'resolve-glob', function () {
         var resolveGlob = pequire( '../lib/resolve-glob', pdeps );
 
         var spy = pdeps.glob.sync;
-        var globOpts = { 'nosort': true };
+        var globOpts = { 'nosort': true, 'cwd': undefined };
 
         resolveGlob( 'single-glob-pattern' );
         spy.calledOnce.should.be.true;
@@ -23,9 +23,9 @@ describe( 'resolve-glob', function () {
 
         spy.reset();
 
-        resolveGlob( [ 'array', 'with', 'more', 'than', 'one', 'element' ] );
+        globOpts = { 'nosort': true, 'cwd': 'somedir' };
+        resolveGlob( [ 'array', 'with', 'more', 'than', 'one', 'element' ], 'somedir' );
         spy.calledOnce.should.be.true;
         spy.calledWith( '{array,with,more,than,one,element}', globOpts ).should.be.true;
     } );
-
 } );

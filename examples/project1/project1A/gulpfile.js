@@ -1,17 +1,18 @@
 // this will use a private gulp instance
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 
-gulp.task('dependency', function() {
-	console.log('running project1A dependency')
+gulp.task('precompile', function() {
+	gutil.log('precompiling project1A')
 });
 
-gulp.task('compile', [ 'dependency' ], function() {
-	console.log('compiling project1A')
+gulp.task('compile', [ 'precompile' ], function() {
+	gutil.log('compiling project1A')
 });
  
 gulp.task('watch', function() {
 	gulp.watch(['watchfile.js'], function() {
-		console.log('watched project1A');
+		gutil.log('watched project1A');
 	});
 });
 

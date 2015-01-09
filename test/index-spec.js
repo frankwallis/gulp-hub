@@ -1,3 +1,4 @@
+var path = require('path');
 var _       = require( 'lodash' );
 var should  = require( 'should' );
 var sinon   = require( 'sinon' );
@@ -10,7 +11,7 @@ var HAPPY_PROXY_DEPS = {
         log:    _.noop,
         colors: { yellow: _.noop }
     },
-    './resolve-glob': _.noop,
+    './resolve-glob': function () { return [] },
     './get-subfiles': function () { return [] },
     './load-subfile': _.noop,
     './add-task':     _.noop,
@@ -43,7 +44,7 @@ describe( 'index', function () {
     } );
 
     it( 'resolves a glob pattern to a file list', function () {
-        var resolveGlobSpy = sinon.spy();
+        var resolveGlobSpy = sinon.spy(function() { return []; });
         var hub = getHub( { './resolve-glob': resolveGlobSpy } );
         hub( 'test-pattern' );
         resolveGlobSpy.calledOnce.should.be.true;
@@ -53,12 +54,13 @@ describe( 'index', function () {
     it( 'creates a list of Gulp Hub files from a file list', function () {
         var spy = sinon.spy( HAPPY_PROXY_DEPS[ './get-subfiles' ] );
         var hub = getHub( {
-            './resolve-glob': function () { return 'resolve-glob-return' },
+            './resolve-glob': function () { return ['resolve-glob-return'] },
             './get-subfiles': spy
         } );
         hub( 'test-pattern' );
+        var absolutePath = path.join(__dirname, 'resolve-glob-return');
         spy.calledOnce.should.be.true;
-        spy.calledWith( 'resolve-glob-return' ).should.be.true;
+        spy.calledWith( [absolutePath] ).should.be.true;
     } );
 
     it( 'logs each file it loads, path in yellow', function () {

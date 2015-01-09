@@ -1,13 +1,11 @@
+var hub = require('../../lib/index.js');
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 
 gulp.task('compile', function() {
-	console.log('compiling project1')
+	gutil.log('compiling project1');
 });
 
-gulp.task('watch', function() {
-	gulp.watch(['./watchfile.js'], function() {
-		console.log('watched project1');
-	});
-});
- 
 gulp.task('default', [ 'compile' ]);
+
+hub(['project*/gulpfile.js']);

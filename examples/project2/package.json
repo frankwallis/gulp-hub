@@ -35,5 +35,6 @@
     "gulp-chug",
     "multi",
     "gulpplugin"
-  ]
+  ],
+  "private": true
 }
