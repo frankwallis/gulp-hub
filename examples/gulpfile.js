@@ -8,14 +8,11 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var hub = require('../lib/index.js');
 
-// gulp.task('compile', function(cb) {
-// 	console.log('compiling example');
-//     cb();
-// });
-
-hub(['project1/gulpfile.js', 'proj*/gulpfile.js']);
-
-gulp.task('local', function(cb) {
-	console.log('this is a local task');
+gulp.task('compile', function(cb) {
+	gutil.log('compiling example');
     cb();
 });
+
+gulp.task('default', [ 'compile' ]);
+
+hub(['project1/gulpfile.js', 'proj*/gulpfile.js', 'gulpfile.js']);

@@ -58,9 +58,8 @@ describe( 'index', function () {
             './get-subfiles': spy
         } );
         hub( 'test-pattern' );
-        var absolutePath = path.join(__dirname, 'resolve-glob-return');
         spy.calledOnce.should.be.true;
-        spy.calledWith( [absolutePath] ).should.be.true;
+        spy.calledWith( ['test/resolve-glob-return'] ).should.be.true;
     } );
 
     it( 'logs each file it loads, path in yellow', function () {
