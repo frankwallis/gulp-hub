@@ -1,6 +1,8 @@
-# [gulp](http://gulpjs.com/)-hub
+# gulp-hub
 
-> Gulp extension to run tasks from multiple gulpfiles.
+> [Gulp](http://gulpjs.com/) extension to run tasks from multiple gulpfiles.
+
+[![build status](https://secure.travis-ci.org/frankwallis/gulp-hub.png)](http://travis-ci.org/frankwallis/gulp-hub)
 
 Usage:
 
@@ -14,7 +16,7 @@ Usage:
 
     ```js
     var hub = require('gulp-hub');
-    hub('./project*/gulpfile.js');
+    hub(['./project1/gulpfile.js', './project1/gulpfile.js']);
     ```
 
 3. Run `gulp [taskname]`
