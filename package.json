@@ -34,7 +34,7 @@
   "dependencies": {
     "callsite": "^1.0.0",
     "glob": "^4.3.5",
-    "gulp": "^4.0.0",
+    "gulp": "gulpjs/gulp#4.0",
     "gulp-util": "^3.0.2",
     "lodash": "^2.4.1"
   },

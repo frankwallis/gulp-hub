@@ -4,6 +4,8 @@ var should  = require( 'should' );
 var sinon   = require( 'sinon' );
 var pequire = require( 'proxyquire' );
 
+var HubRegistry = require('../lib/hub-registry');
+
 // Happy-path proxyquire dependencies, i.e., dependencies that will allow
 // gulp-hub to complete without errors
 var HAPPY_PROXY_DEPS = {
@@ -71,4 +73,18 @@ describe( 'index', function () {
         loadSpy.calledWith( 'abs-path-1' ).should.be.true;
         loadSpy.calledWith( 'abs-path-2' ).should.be.true;
     });
+
+    it('transfers tasks from existing subfile', function () {
+        var regSpy = sinon.spy(function(a) { return {}; });
+        var hub = getHub( {
+            './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
+            'gulp': {
+                registry: regSpy
+            }
+        });
+        hub( 'test-pattern' );
+        regSpy.calledTwice.should.be.true;
+        regSpy.calledWith().should.be.true;
+    });
+
 });
