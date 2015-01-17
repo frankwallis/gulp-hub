@@ -2,18 +2,22 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 
-gulp.task('precompile', function() {
-	gutil.log('precompiling project1A')
-});
+function precompile(cb) {
+	gutil.log('precompiling project1A');
+	cb();
+};
 
-gulp.task('compile', [ 'precompile' ], function() {
+function compile1A(cb) {
 	gutil.log('compiling project1A')
-});
- 
+	cb();
+};
+
+gulp.task('compile', gulp.series(precompile, compile1A));
+
 gulp.task('watch', function() {
 	gulp.watch(['watchfile.js'], function() {
 		gutil.log('watched project1A');
 	});
 });
 
-gulp.task('default', [ 'compile' ]);
+gulp.task('default', compile1A);

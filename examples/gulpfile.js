@@ -8,11 +8,19 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var hub = require('../lib/index.js');
 
-gulp.task('compile', function(cb) {
-	gutil.log('compiling example');
-    cb();
-});
+function precompile(cb) {
+	gutil.log('precompiling example');
+	cb();
+};
 
-gulp.task('default', [ 'compile' ]);
+function compile(cb) {
+	gutil.log('compiling example')
+	cb();
+};
 
-hub(['project1/gulpfile.js', 'proj*/gulpfile.js', 'gulpfile.js']);
+gulp.task('build', gulp.series(precompile, compile));
+gulp.task('compile', gulp.series(precompile, compile));
+
+//hub(['project1/gulpfile.js', 'proj*/gulpfile.js']);//, 'gulpfile.js']);
+hub(['proj*/**/gulpfile.js']);//, 'gulpfile.js']);
+
