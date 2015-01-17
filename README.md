@@ -2,7 +2,7 @@
 
 > [Gulp](http://gulpjs.com/) extension to run tasks from multiple gulpfiles.
 
-[![build status](https://secure.travis-ci.org/frankwallis/gulp-hub.png)](http://travis-ci.org/frankwallis/gulp-hub)
+[![build status](https://secure.travis-ci.org/frankwallis/gulp-hub.png?branch=master)](http://travis-ci.org/frankwallis/gulp-hub?branch=master)
 
 Usage:
 
