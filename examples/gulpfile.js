@@ -21,6 +21,4 @@ function compile(cb) {
 gulp.task('build', gulp.series(precompile, compile));
 gulp.task('compile', gulp.series(precompile, compile));
 
-//hub(['project1/gulpfile.js', 'proj*/gulpfile.js']);//, 'gulpfile.js']);
-hub(['proj*/**/gulpfile.js']);//, 'gulpfile.js']);
-
+hub(['project1/gulpfile.js', 'proj*/gulpfile.js']);
