@@ -1,57 +1,55 @@
 {
-  "name": "gulp-hub",
-  "description": "A gulp plugin to run tasks from multiple gulpfiles",
-  "version": "4.0.0",
-  "homepage": "https://github.com/frankwallis/gulp-hub",
-  "author": {
-    "name": "Frank Wallis",
-    "email": "fwallis@outlook.com"
-  },
-  "contributors": [
-    "Rob McGuire-Dale <rmcguir@rei.com>",
-    "Andrew Gatlabayan <agatlab@rei.com>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/frankwallis/gulp-hub.git"
-  },
-  "bugs": {
-    "url": "https://github.com/frankwallis/gulp-hub/issues"
-  },
-  "licenses": [
-    {
+   "name": "gulp-hub",
+   "description": "A gulp plugin to run tasks from multiple gulpfiles",
+   "version": "4.0.0",
+   "homepage": "https://github.com/frankwallis/gulp-hub",
+   "author": {
+      "name": "Frank Wallis"
+   },
+   "contributors": [
+      "Rob McGuire-Dale <rmcguir@rei.com>",
+      "Andrew Gatlabayan <agatlab@rei.com>"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/frankwallis/gulp-hub.git"
+   },
+   "bugs": {
+      "url": "https://github.com/frankwallis/gulp-hub/issues"
+   },
+   "licenses": [{
       "type": "MIT",
       "url": "https://github.com/frankwallis/gulp-hub/blob/master/LICENSE-MIT"
-    }
-  ],
-  "main": "lib/index.js",
-  "engines": {
-    "node": ">= 0.8.0"
-  },
-  "scripts": {
-    "test": "gulp test"
-  },
-  "dependencies": {
-    "callsite": "^1.0.0",
-    "glob": "^4.3.5",
-    "gulp": "gulpjs/gulp#4.0",
-    "gulp-util": "^3.0.2",
-    "lodash": "^2.4.1"
-  },
-  "devDependencies": {
-    "gulp-istanbul": "^0.4.0",
-    "gulp-mocha": "^2.0.0",
-    "mocha": "^1.21.3",
-    "proxyquire": "^1.0.1",
-    "should": "^4.0.4",
-    "sinon": "^1.10.3"
-  },
-  "keywords": [
-    "gulp",
-    "hub",
-    "grunt-hub",
-    "gulp-chug",
-    "multi",
-    "gulpplugin"
-  ]
+   }],
+   "main": "lib/index.js",
+   "engines": {
+      "node": ">= 0.8.0"
+   },
+   "scripts": {
+      "test": "gulp test"
+   },
+   "dependencies": {
+      "callsite": "^1.0.0",
+      "glob": "^5.0.3",
+      "gulp": "^4.0.0",
+      "gulp-util": "^3.0.2",
+      "lodash": "^3.5.0",
+      "undertaker-registry": "0.0.2"
+   },
+   "devDependencies": {
+      "gulp-istanbul": "^0.6.0",
+      "gulp-mocha": "^2.0.0",
+      "mocha": "^2.2.1",
+      "proxyquire": "^1.4.0",
+      "should": "^4.0.4",
+      "sinon": "^1.14.0"
+   },
+   "keywords": [
+      "gulp",
+      "hub",
+      "grunt-hub",
+      "gulp-chug",
+      "multi",
+      "gulpplugin"
+   ]
 }

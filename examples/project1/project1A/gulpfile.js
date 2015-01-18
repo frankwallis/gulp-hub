@@ -12,12 +12,12 @@ function compile1A(cb) {
 	cb();
 };
 
-gulp.task('compile', gulp.series(precompile, compile1A));
+gulp.task('build', gulp.series(precompile, compile1A));
+
+gulp.task('project1ATask', compile1A);
 
 gulp.task('watch', function() {
 	gulp.watch(['watchfile.js'], function() {
 		gutil.log('watched project1A');
 	});
 });
-
-gulp.task('default', compile1A);

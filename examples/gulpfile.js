@@ -1,12 +1,12 @@
-/* 
+/*
 	You can run this by calling gulp from the command line.
-	> gulp
-	> gulp watch
-	> gulp compile
+	examples> gulp build
+	examples> gulp watch
+	examples> gulp exampleTask
 */
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var hub = require('../lib/index.js');
+var HubRegistry = require('../lib/');
 
 function precompile(cb) {
 	gutil.log('precompiling example');
@@ -19,6 +19,7 @@ function compile(cb) {
 };
 
 gulp.task('build', gulp.series(precompile, compile));
-gulp.task('compile', gulp.series(precompile, compile));
+gulp.task('exampleTask', gulp.series(precompile, compile));
 
-hub(['project1/gulpfile.js', 'proj*/gulpfile.js']);
+var hub = new HubRegistry(['./project*/gulpfile.js']);
+gulp.registry(hub);

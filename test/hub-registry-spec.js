@@ -1,58 +1,87 @@
-var _ = require('lodash');
-var gulp = require('gulp');
-var should  = require( 'should' );
+var path = require('path');
+var _       = require('lodash');
+var should  = require('should');
+var sinon   = require('sinon');
+var pequire = require('proxyquire');
+var DefaultRegistry = require('undertaker-registry');
+var HubRegistry = require('../lib/');
 
-var HubRegistry = require('../lib/hub-registry');
+var registry = new DefaultRegistry();
 
-describe( 'hub-registry', function () {
+// Happy-path proxyquire dependencies, i.e., dependencies that will allow
+// gulp-hub to complete without errors
+var HAPPY_PROXY_DEPS = {
+   '_': _,
+   'path': path,
+   'undertaker-registry': DefaultRegistry,
+   'gulp-util': {
+      log:    _.noop,
+      colors: { yellow: _.noop }
+   },
+   './resolve-glob': function () { return [] },
+   './load-subfile': function () { return HAPPY_PROXY_DEPS.gulp },
+   'gulp': {
+      'registry': function() {
+         return registry;
+      }
+   }
+};
 
-    it('defers creation of tasks until flushed', function () {
-		var hub = new HubRegistry();
-		gulp.registry()._tasks = {};
-		gulp.registry(hub);
+// Proxyquire gulp-hub, optionally extending the happy-path proxy dependencies
+var getHubRegistry = function ( proxyDeps ) {
+   return pequire( '../lib/hub-registry', _.assign( {}, HAPPY_PROXY_DEPS, proxyDeps ) );
+};
 
-		hub.setCurrentSubfile('a');
-		gulp.task('task1', function() {});
-		hub._tasks.should.eql({});
+describe( 'HubRegistry', function () {
 
-		hub.resetCurrentSubfile();
-		hub._tasks.should.eql({});
-		
-		hub.flushPendingTasks();		
-		hub._tasks.should.have.property('task1');
-    });
+   it('is a constructor function', function () {
+      var HubRegistry = getHubRegistry();
+      HubRegistry.should.be.an.instanceOf(Function);
+      HubRegistry().should.be.an.instanceOf(HubRegistry);
+      new HubRegistry().should.be.an.instanceOf(HubRegistry);
+   });
 
-    it('creates subtasks with name <filepath>-<taskname>', function () {
-		var hub = new HubRegistry();
-		gulp.registry()._tasks = {};
-		gulp.registry(hub);
+   it('resolves a glob pattern to a file list', function () {
+      var resolveGlobSpy = sinon.spy(function() { return []; });
+      var HubRegistry = getHubRegistry( { './resolve-glob': resolveGlobSpy } );
+      var hub = new HubRegistry( 'test-pattern' );
+      resolveGlobSpy.calledOnce.should.be.true;
+      resolveGlobSpy.calledWith('test-pattern', __dirname).should.be.true;
+   });
 
-		hub.setCurrentSubfile('a');
-		gulp.task('task1', function() {});
-		hub.resetCurrentSubfile();		
-		hub.flushPendingTasks();
+   it('logs each file it loads, path in yellow', function () {
+      var logSpy = sinon.spy();
+      var colorSpy = sinon.spy( function ( s ) { return 'yellow-' + s } );
 
-		hub._tasks.should.have.property('a-task1');
-    });
+      var HubRegistry = getHubRegistry( {
+         'gulp-util': {
+            log:    logSpy,
+            colors: { yellow: colorSpy }
+         },
+         './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; }
+      });
 
-    it('returns a copy of its task map', function () {
-		var hub = new HubRegistry();
-		gulp.registry()._tasks = {};
-		gulp.registry(hub);
+      var hub = new HubRegistry( 'test-pattern' );
 
-		hub.setCurrentSubfile('a');
-		gulp.task('task1', function () {});
-		hub.resetCurrentSubfile();		
-		hub.flushPendingTasks();
+      logSpy.calledTwice.should.be.true;
+      logSpy.calledWith( 'Loading', 'yellow-abs-path-1' ).should.be.true;
+      logSpy.calledWith( 'Loading', 'yellow-abs-path-2' ).should.be.true;
 
-		var tasks = hub.tasks();
-		tasks.should.have.property('task1', hub._tasks['task1']);
-		tasks.should.have.property('a-task1', hub._tasks['a-task1']);
-    });
+      colorSpy.calledTwice.should.be.true;
+      colorSpy.calledWith( 'abs-path-1' ).should.be.true;
+      colorSpy.calledWith( 'abs-path-2' ).should.be.true;
+   });
 
-    it('returns an instance of HubRegistry', function () {
-		var hub = HubRegistry();
-		hub.should.be.an.instanceOf(HubRegistry);
-    });
+   it('loads each subfile', function () {
+      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS.gulp });
+      var HubRegistry = getHubRegistry( {
+         './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
+         './load-subfile': loadSpy
+      });
+      var hub = new HubRegistry( 'test-pattern' );
+      loadSpy.calledTwice.should.be.true;
+      loadSpy.calledWith( 'abs-path-1' ).should.be.true;
+      loadSpy.calledWith( 'abs-path-2' ).should.be.true;
+   });
 
 });

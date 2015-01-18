@@ -1,14 +1,14 @@
 var gulp = require('gulp');
-var istanbul = require('gulp-istanbul');
 var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
 
 function test(cb) {
   gulp.src('lib/**/*.js')
-    .pipe(istanbul()) // Covering files
+    .pipe(istanbul()) 					// instrument the files
     .on('finish', function () {
-      gulp.src(['test/*-spec.js'])
-        .pipe(mocha())
-        .pipe(istanbul.writeReports()) // Creating the reports after tests runned
+      gulp.src(['test/*-spec.js', 'test/*-test.js'])
+        .pipe(mocha())					// run the specs
+        .pipe(istanbul.writeReports()) 	// write coverage reports
         .on('end', cb);
     });
 }

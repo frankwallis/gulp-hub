@@ -1,6 +1,7 @@
-var hub = require('../../lib/index.js');
+//var hub = require('../../lib/index.js');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var HubRegistry = require('../../lib/');
 
 function precompile(cb) {
 	gutil.log('precompiling project1');
@@ -12,7 +13,8 @@ function compile(cb) {
 	cb();
 };
 
-gulp.task('compile', gulp.series(precompile, compile));
-gulp.task('default', gulp.series(precompile, compile));
+gulp.task('build', gulp.series(precompile, compile));
+gulp.task('project1Task', gulp.series(precompile, compile));
 
-hub(['project*/gulpfile.js']);
+var hub = new HubRegistry(['./project*/gulpfile.js']);
+gulp.registry(hub);
