@@ -31,7 +31,7 @@
     "test": "gulp test"
   },
   "peerDependencies": {
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.0-alpha.1"
   },
   "dependencies": {
     "callsite": "^1.0.0",
