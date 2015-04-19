@@ -25,10 +25,10 @@
   ],
   "main": "lib/index.js",
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "./node_modules/gulp/bin/gulp.js test"
   },
   "peerDependencies": {
     "gulp": "^4.0.0-alpha.1"

@@ -6,7 +6,7 @@
 */
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var HubRegistry = require('../lib/');
+var HubRegistry = require('../');
 
 function precompile(cb) {
 	gutil.log('precompiling example');

@@ -2,7 +2,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 
-function precompile(cb) {
+function precompile1A(cb) {
 	gutil.log('precompiling project1A');
 	cb();
 };
@@ -12,7 +12,7 @@ function compile1A(cb) {
 	cb();
 };
 
-gulp.task('build', gulp.series(precompile, compile1A));
+gulp.task('build', gulp.series(precompile1A, compile1A));
 
 gulp.task('project1ATask', compile1A);
 

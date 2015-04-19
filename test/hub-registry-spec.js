@@ -19,7 +19,7 @@ var HAPPY_PROXY_DEPS = {
       colors: { yellow: _.noop }
    },
    './resolve-glob': function () { return [] },
-   './load-subfile': function () { return HAPPY_PROXY_DEPS.gulp },
+   './load-subfile': function () { return HAPPY_PROXY_DEPS.gulp.registry() },
    'gulp': {
       'registry': function() {
          return registry;
@@ -73,6 +73,18 @@ describe( 'HubRegistry', function () {
    });
 
    it('loads each subfile', function () {
+      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS.gulp });
+      var HubRegistry = getHubRegistry( {
+         './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
+         './load-subfile': loadSpy
+      });
+      var hub = new HubRegistry( 'test-pattern' );
+      loadSpy.calledTwice.should.be.true;
+      loadSpy.calledWith( 'abs-path-1' ).should.be.true;
+      loadSpy.calledWith( 'abs-path-2' ).should.be.true;
+   });
+
+   it('doesnt use gulp.series if there is only one file', function () {
       var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS.gulp });
       var HubRegistry = getHubRegistry( {
          './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
