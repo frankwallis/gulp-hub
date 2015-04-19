@@ -12,8 +12,10 @@ function compile1A(cb) {
 	cb();
 };
 
-gulp.task('build', gulp.series(precompile1A, compile1A));
+gulp.task('precompile1A', precompile1A);
+gulp.task('compile1A', compile1A);
 
+gulp.task('build', gulp.series('precompile1A', 'compile1A'));
 gulp.task('project1ATask', compile1A);
 
 gulp.task('watch', function() {

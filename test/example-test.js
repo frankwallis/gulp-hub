@@ -38,19 +38,19 @@ describe( 'HubRegistry', function () {
          '../examples/project1/proj*A/gulpfile.js',
          '../examples/project1/proj*B/gulpfile.js'
       ]);
-      _.keys(hub.tasks()).length.should.be.equal(4);
+      _.keys(hub.tasks()).length.should.be.equal(6);
    });
 
    it('handles recursive calls', function () {
       var hub = new HubRegistry('../examples/project1/gulpfile.js');
-      _.keys(hub.tasks()).length.should.be.equal(5);
+      _.keys(hub.tasks()).length.should.be.equal(7);
       _.keys(hub.tasks()).should.containEql('project1ATask');
       _.keys(hub.tasks()).should.containEql('project1BTask');
    });
 
    it('returns a copy of its task map', function () {
       var hub = new HubRegistry(['../examples/gulpfile.js']);
-      _.keys(hub.tasks()).length.should.be.equal(6);
+      _.keys(hub.tasks()).length.should.be.equal(8);
       _.keys(hub.tasks()).should.containEql('project1ATask');
       _.keys(hub.tasks()).should.containEql('project1BTask');
    });
