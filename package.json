@@ -31,7 +31,7 @@
     "test": "./node_modules/gulp/bin/gulp.js test"
   },
   "peerDependencies": {
-    "gulp": "^4.0.0-alpha.1"
+    
   },
   "dependencies": {
     "callsite": "^1.0.0",
@@ -42,6 +42,7 @@
     "undertaker-registry": "0.0.2"
   },
   "devDependencies": {
+    "gulp": "gulpjs/gulp#4.0",
     "gulp-istanbul": "^0.6.0",
     "gulp-mocha": "^2.0.0",
     "mocha": "^2.2.1",
