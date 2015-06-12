@@ -30,8 +30,8 @@ Gulp-hub will execute that task in all of the gulpfiles.
         excludedTasks: ['taskA', 'taskB']
     };
     hub(['./project1/gulpfile.js', './project2/gulpfile.js'], options);
-    gulp('taskA', function(){/*task to run*/})
-    gulp('taskB', function(){/*task to run*/})
+    gulp('taskA', function(){/*task to run*/});
+    gulp('taskB', function(){/*task to run*/});
     ```
 When you call gulp with taskA or taskB, the hub function will not generate all the hub tasks. 
 This is useful if you have a cleanup task and hub loads gulpfiles with cleaned node packages. 
