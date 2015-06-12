@@ -120,4 +120,21 @@ describe( 'index', function () {
         addTaskSpy.calledWith( 'foo' ).should.be.true;
         addTaskSpy.calledWith( 'bar' ).should.be.true;
     } );
+
+    it( 'skips the process if passed in gulp argument matches ignore argument', function () {
+        var getSubFileSpy = sinon.spy();
+        var getSubFilesSpy = sinon.spy();
+        var addTaskSpy = sinon.spy();
+
+        var hub = getHub({
+            './load-subfile': getSubFileSpy,
+            './get-subfiles': getSubFilesSpy,
+            './add-task': addTaskSpy
+        });
+        process.argv = ['./test/', 'some-excluded-task'];
+        hub('testPattern', 'some-excluded-task')
+        getSubFileSpy.should.not.be.called
+        getSubFilesSpy.should.not.be.called
+        addTaskSpy.should.not.be.called
+    });
 } );

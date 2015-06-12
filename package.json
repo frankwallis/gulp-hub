@@ -37,6 +37,7 @@
     "gulp": "^3.8.10",
     "gulp-util": "^2.2.16",
     "lodash": "^2.4.1",
+    "minimist": "^1.1.1",
     "run-sequence": "^1.0.2"
   },
   "devDependencies": {
