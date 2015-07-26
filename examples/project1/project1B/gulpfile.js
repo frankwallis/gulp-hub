@@ -12,7 +12,7 @@ gulp.task('compile', [ 'precompile' ], function() {
  
 gulp.task('watch', function() {
 	gulp.watch(['watchfile.js'], function() {
-		gutil.log('watched project1A');
+		gutil.log('watched project1B');
 	});
 });
 
