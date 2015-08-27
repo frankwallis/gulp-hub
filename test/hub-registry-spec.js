@@ -1,12 +1,13 @@
 var path = require('path');
 var _       = require('lodash');
+var gulp    = require('gulp');
 var should  = require('should');
 var sinon   = require('sinon');
 var pequire = require('proxyquire');
 var DefaultRegistry = require('undertaker-registry');
 var HubRegistry = require('../lib/');
 
-var registry = new DefaultRegistry();
+var registry = gulp.registry();
 
 // Happy-path proxyquire dependencies, i.e., dependencies that will allow
 // gulp-hub to complete without errors
@@ -19,12 +20,7 @@ var HAPPY_PROXY_DEPS = {
       colors: { yellow: _.noop }
    },
    './resolve-glob': function () { return [] },
-   './load-subfile': function () { return HAPPY_PROXY_DEPS.gulp.registry() },
-   'gulp': {
-      'registry': function() {
-         return registry;
-      }
-   }
+   './load-subfile': function () { return registry }
 };
 
 // Proxyquire gulp-hub, optionally extending the happy-path proxy dependencies
@@ -62,6 +58,7 @@ describe( 'HubRegistry', function () {
       });
 
       var hub = new HubRegistry( 'test-pattern' );
+      hub.init(gulp);
 
       logSpy.calledTwice.should.be.true;
       logSpy.calledWith( 'Loading', 'yellow-abs-path-1' ).should.be.true;
@@ -73,27 +70,29 @@ describe( 'HubRegistry', function () {
    });
 
    it('loads each subfile', function () {
-      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS.gulp });
+      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS['./load-subfile']() });
       var HubRegistry = getHubRegistry( {
          './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
          './load-subfile': loadSpy
       });
       var hub = new HubRegistry( 'test-pattern' );
+      hub.init(gulp);
       loadSpy.calledTwice.should.be.true;
-      loadSpy.calledWith( 'abs-path-1' ).should.be.true;
-      loadSpy.calledWith( 'abs-path-2' ).should.be.true;
+      loadSpy.calledWith( gulp, 'abs-path-1' ).should.be.true;
+      loadSpy.calledWith( gulp, 'abs-path-2' ).should.be.true;
    });
 
    it('doesnt use gulp.series if there is only one file', function () {
-      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS.gulp });
+      var loadSpy = sinon.spy(function() { return HAPPY_PROXY_DEPS['./load-subfile'](); });
       var HubRegistry = getHubRegistry( {
          './resolve-glob': function () { return [ 'abs-path-1', 'abs-path-2' ]; },
          './load-subfile': loadSpy
       });
       var hub = new HubRegistry( 'test-pattern' );
+      hub.init(gulp);
       loadSpy.calledTwice.should.be.true;
-      loadSpy.calledWith( 'abs-path-1' ).should.be.true;
-      loadSpy.calledWith( 'abs-path-2' ).should.be.true;
+      loadSpy.calledWith( gulp, 'abs-path-1' ).should.be.true;
+      loadSpy.calledWith( gulp, 'abs-path-2' ).should.be.true;
    });
 
 });
