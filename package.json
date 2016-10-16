@@ -29,20 +29,21 @@
   "dependencies": {
     "callsite": "^1.0.0",
     "fwd": "^0.2.2",
-    "glob": "^5.0.3",
+    "glob": "^7.1.1",
     "gulp-util": "^3.0.2",
-    "lodash": "^3.5.0",
-    "undertaker-forward-reference": "^0.1.0"
+	"lodash.foreach": "^4.0.0",
+    "lodash.isstring": "^4.0.0",
+    "undertaker-forward-reference": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "gulpjs/gulp#4.0",
-    "gulp-istanbul": "^0.6.0",
-    "gulp-mocha": "^2.0.0",
-    "mocha": "^2.2.1",
+    "gulp-istanbul": "^1.1.1",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.2",
     "proxyquire": "^1.4.0",
-    "should": "^4.0.4",
+    "should": "^11.1.1",
     "sinon": "^1.14.0",
-    "undertaker-registry": "0.0.3"
+    "undertaker-registry": "1.0.0"
   },
   "keywords": [
     "gulp",
