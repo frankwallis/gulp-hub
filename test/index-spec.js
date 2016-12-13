@@ -120,4 +120,43 @@ describe( 'index', function () {
         addTaskSpy.calledWith( 'foo' ).should.be.true;
         addTaskSpy.calledWith( 'bar' ).should.be.true;
     } );
+
+    it('skips the process if passed in gulp argument matches excludedTasks argument', function () {
+        var getSubFileSpy = sinon.spy();
+        var getSubFilesSpy = sinon.spy();
+        var addTaskSpy = sinon.spy();
+
+        var hub = getHub({
+            './load-subfile': getSubFileSpy,
+            './get-subfiles': getSubFilesSpy,
+            './add-task': addTaskSpy
+        });
+        process.argv = ['./test/', 'some-excluded-task'];
+        var options = { excludedTasks: ['some-excluded-task']};
+        hub('testPattern', options);
+        getSubFileSpy.should.not.be.called;
+        getSubFilesSpy.should.not.be.called;
+        addTaskSpy.should.not.be.called;
+    });
+
+    it('skips the process if passed in gulp argument matches multiple excludedTasks', function () {
+        var getSubFileSpy = sinon.spy();
+        var getSubFilesSpy = sinon.spy();
+        var addTaskSpy = sinon.spy();
+
+        var hub = getHub({
+            './load-subfile': getSubFileSpy,
+            './get-subfiles': getSubFilesSpy,
+            './add-task': addTaskSpy
+        });
+        process.argv = ['./test/', 'some-excluded-taskB'];
+
+        var options = {
+            excludedTasks: ['some-excluded-taskA', 'some-excluded-taskB']
+        };
+        hub('testPattern', options);
+        getSubFileSpy.should.not.be.called;
+        getSubFilesSpy.should.not.be.called;
+        addTaskSpy.should.not.be.called;
+    });
 } );
