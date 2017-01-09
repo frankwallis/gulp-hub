@@ -79,4 +79,14 @@ describe('Examples', function () {
       _.keys(gulp.registry().tasks()).should.containEql('mytesttask2');
    });
 
+    it('checks that task description and flags are correctly set', function () {
+        var hub = new HubRegistry(['../examples/gulpfile.js']);
+        hub.init(require('gulp'));
+        var project1ATask = hub.tasks().precompile1A.unwrap();
+
+        _.keys(project1ATask).length.should.be.equal(2);
+        _.keys(project1ATask).should.containEql('description');
+        _.keys(project1ATask).should.containEql('flags');
+    });
+
 });
