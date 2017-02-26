@@ -6,6 +6,11 @@ function precompile1A(cb) {
 	gutil.log('precompiling project1A');
 	cb();
 };
+precompile1A.description = 'Precompiling project1A';
+precompile1A.flags = {
+    '--prod': 'Precompiling in production mode (minification, etc).',
+    '--dev': 'Precompiling in development mode.'
+};
 
 function compile1A(cb) {
 	gutil.log('compiling project1A')
