@@ -19,7 +19,7 @@ Basic Usage:
     var HubRegistry = require('gulp-hub');
 
     /* load some gulpfiles into the registry */
-    var hub = new HubRegistry(['./project1/gulpfile.js', './project1/gulpfile.js']);
+    var hub = new HubRegistry(['./project1/gulpfile.js', './project2/gulpfile.js']);
 
     /* tell gulp to use the tasks just loaded */
     gulp.registry(hub);
