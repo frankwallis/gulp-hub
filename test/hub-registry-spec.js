@@ -15,7 +15,7 @@ var HAPPY_PROXY_DEPS = {
    '_': _,
    'path': path,
    'undertaker-registry': DefaultRegistry,
-   'gulp-util': {
+   './gutil': {
       log:    _.noop,
       colors: { yellow: _.noop }
    },
@@ -50,7 +50,7 @@ describe( 'HubRegistry', function () {
       var colorSpy = sinon.spy( function ( s ) { return 'yellow-' + s } );
 
       var HubRegistry = getHubRegistry( {
-         'gulp-util': {
+         './gutil': {
             log:    logSpy,
             colors: { yellow: colorSpy }
          },

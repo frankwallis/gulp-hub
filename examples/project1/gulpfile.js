@@ -1,6 +1,6 @@
 //var hub = require('../../lib/index.js');
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('../../lib/gutil');
 var HubRegistry = require('../../lib/');
 
 function precompile(cb) {

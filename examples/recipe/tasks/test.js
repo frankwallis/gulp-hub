@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('../../../lib/gutil');
 
 function e2e(cb) {
 	gutil.log('running e2e-tests')

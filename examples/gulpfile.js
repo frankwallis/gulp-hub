@@ -5,7 +5,7 @@
 	examples> gulp exampleTask
 */
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('../lib/gutil');
 var HubRegistry = require('../');
 
 function precompile(cb) {
