@@ -1,5 +1,5 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('../../../lib/gutil');
 
 function bundle(cb) {
 	gutil.log('bundling project2')

@@ -1,6 +1,6 @@
 // this will use a private gulp instance
 var gulp = require('gulp');
-var gutil = require('gulp-util');
+var gutil = require('../../../lib/gutil');
 
 function precompile1A(cb) {
 	gutil.log('precompiling project1A');
