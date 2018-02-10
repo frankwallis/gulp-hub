@@ -9,7 +9,7 @@ Basic Usage:
 1. Install gulp-hub:
 
     ```sh
-    $ npm install gulp-hub
+    $ npm install gulp-hub@next
     ```
 
 2. Create a gulpfile.js which looks like this:
